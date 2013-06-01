@@ -7,6 +7,7 @@ module.exports = (grunt) ->
 
   coffeeScripts = [
     'bower_components/este-library/este/**/*.coffee'
+    'bower_components/tripomatic2/**/*.coffee'
     'client/app/js/**/*.coffee'
     'server/**/*.coffee'
   ]
@@ -20,6 +21,7 @@ module.exports = (grunt) ->
     'bower_components/closure-library'
     'bower_components/closure-templates'
     'bower_components/este-library/este'
+    'bower_components/tripomatic2'
     'client/app/js'
   ]
 
@@ -84,6 +86,10 @@ module.exports = (grunt) ->
         no_backticks:
           level: 'ignore'
         max_line_length:
+          level: 'ignore'
+        no_tabs:
+          level: 'ignore'
+        indentation:
           level: 'ignore'
       all:
         files: [
