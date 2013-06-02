@@ -14,6 +14,7 @@ module.exports = (grunt) ->
 
   soyTemplates = [
     'bower_components/este-library/este/**/*.soy'
+    'bower_components/tripomatic2/**/*.soy'
     'client/app/js/**/*.soy'
   ]
 
@@ -115,6 +116,7 @@ module.exports = (grunt) ->
       app:
         src: [
           'bower_components/este-library/este/**/*_test.js'
+          'bower_components/tripomatic2/**/*_test.js'
           'client/**/*_test.js'
         ]
 
@@ -124,6 +126,7 @@ module.exports = (grunt) ->
       app:
         files:
           'client/app/build/app.css': 'client/app/css/app.css'
+          'bower_components/tripomatic2/css/style.css': 'bower_components/tripomatic2/css/style.min.css'
 
     esteBuilder:
       options:
@@ -198,6 +201,7 @@ module.exports = (grunt) ->
         dirs: [
           'bower_components/closure-library/**/'
           'bower_components/este-library/este/**/'
+          'bower_components/tripomatic2/**/'
           'client/**/{js,css}/**/'
           'server/**/'
         ]

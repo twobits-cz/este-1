@@ -30,7 +30,7 @@
     "grunt-contrib-cssmin": "~0.6.0",
     "grunt-contrib-stylus": "~0.5.0",
     "grunt-env": "~0.4.0",
-    "grunt-este": "~2.1.1",
+    "grunt-este": "git://github.com/twobits-cz/grunt-este.git#50106ade3658ed8e21c5c519f039eb0c2b86b7b9",
     "grunt-este-watch": "~0.0.3",
     "grunt-release": "~0.3.3",
     "grunt-text-replace": "~0.3.2",
