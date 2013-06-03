@@ -7,23 +7,23 @@ module.exports = (grunt) ->
 
   coffeeScripts = [
     'bower_components/este-library/este/**/*.coffee'
-    'bower_components/tripomatic2/**/*.coffee'
     'client/app/js/**/*.coffee'
+    'client/tripomatic2/js/**/*.coffee'
     'server/**/*.coffee'
   ]
 
   soyTemplates = [
     'bower_components/este-library/este/**/*.soy'
-    'bower_components/tripomatic2/**/*.soy'
     'client/app/js/**/*.soy'
+    'client/tripomatic2/js/**/*.soy'
   ]
 
   clientDirs = [
     'bower_components/closure-library'
     'bower_components/closure-templates'
     'bower_components/este-library/este'
-    'bower_components/tripomatic2'
     'client/app/js'
+    'client/tripomatic2/js'
   ]
 
   clientDepsPath =
@@ -43,7 +43,7 @@ module.exports = (grunt) ->
         src: [
           'bower_components/este-library/este/**/*.{js,css}'
           'client/**/build/**.*'
-          'client/**/{js,css}/**/*.{js,css}'
+          'client/**/{js}/**/*.{js}'
           'server/**/*.js'
         ]
 
@@ -116,7 +116,6 @@ module.exports = (grunt) ->
       app:
         src: [
           'bower_components/este-library/este/**/*_test.js'
-          'bower_components/tripomatic2/**/*_test.js'
           'client/**/*_test.js'
         ]
 
@@ -126,7 +125,6 @@ module.exports = (grunt) ->
       app:
         files:
           'client/app/build/app.css': 'client/app/css/app.css'
-          'bower_components/tripomatic2/css/style.css': 'bower_components/tripomatic2/css/style.min.css'
 
     esteBuilder:
       options:
@@ -201,7 +199,6 @@ module.exports = (grunt) ->
         dirs: [
           'bower_components/closure-library/**/'
           'bower_components/este-library/este/**/'
-          'bower_components/tripomatic2/**/'
           'client/**/{js,css}/**/'
           'server/**/'
         ]
