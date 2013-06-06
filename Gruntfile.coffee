@@ -31,7 +31,7 @@ module.exports = (grunt) ->
 
   grunt.initConfig
 
-    # build tasks
+    #build tasks
 
     clean:
       app:
