@@ -2,19 +2,17 @@ module.exports = (grunt) ->
 
   stylusStyles = [
     'bower_components/este-library/este/**/*.styl'
-    'client/app/css/**/*.styl'
+    'client/tripomatic2/css/**/*.styl'
   ]
 
   coffeeScripts = [
     'bower_components/este-library/este/**/*.coffee'
-    'client/app/js/**/*.coffee'
     'client/tripomatic2/js/**/*.coffee'
     'server/**/*.coffee'
   ]
 
   soyTemplates = [
     'bower_components/este-library/este/**/*.soy'
-    'client/app/js/**/*.soy'
     'client/tripomatic2/js/**/*.soy'
   ]
 
@@ -22,7 +20,6 @@ module.exports = (grunt) ->
     'bower_components/closure-library'
     'bower_components/closure-templates'
     'bower_components/este-library/este'
-    'client/app/js'
     'client/tripomatic2/js'
   ]
 
@@ -60,7 +57,7 @@ module.exports = (grunt) ->
       app:
         files: [
           expand: true
-          src: 'client/app/css/app.styl'
+          src: 'client/tripomatic2/css/app.styl'
           ext: '.css'
         ]
 
@@ -124,7 +121,7 @@ module.exports = (grunt) ->
     cssmin:
       app:
         files:
-          'client/app/build/app.css': 'client/app/css/app.css'
+          'client/tripomatic2/build/app.css': 'client/tripomatic2/css/app.css'
 
     esteBuilder:
       options:
@@ -157,14 +154,14 @@ module.exports = (grunt) ->
 
       app:
         options:
-          namespace: 'app.start'
-          outputFilePath: 'client/app/build/app.js'
+          namespace: 'tb.tripomatic.planner.start'
+          outputFilePath: 'client/tripomatic2/build/app.js'
 
       # Use this task to build specific language, /client/build/app_de.js etc.
       # appLocalized:
       #   options:
       #     namespace: 'app.start'
-      #     outputFilePath: 'client/app/build/app.js'
+      #     outputFilePath: 'client/tripomatic2/build/app.js'
       #     messagesPath: 'messages/app'
       #     locales: ['cs', 'de']
 
@@ -243,7 +240,7 @@ module.exports = (grunt) ->
         options:
           root: [
             'bower_components/este-library/este'
-            'client/app/js'
+            'client/tripomatic2/js'
           ]
           messagesPath: 'messages/app'
           languages: ['en', 'cs']
