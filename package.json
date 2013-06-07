@@ -1,6 +1,6 @@
 {
   "name": "este",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "Este is robust, modular and comfortable dev stack for web apps development with several unique features",
   "author": "Daniel Steigerwald <daniel@steigerwald.cz>",
   "keywords": [
@@ -18,8 +18,8 @@
     "url": "https://github.com/Steida/este.git"
   },
   "dependencies": {
-    "express": "~3.2.2",
-    "jade": "~0.30.0"
+    "express": "~3.2.6",
+    "jade": "~0.31.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -27,12 +27,12 @@
     "grunt-coffeelint": "~0.0.6",
     "grunt-contrib-clean": "~0.4.1",
     "grunt-contrib-coffee": "~0.7.0",
-    "grunt-contrib-cssmin": "~0.6.0",
+    "grunt-contrib-cssmin": "~0.6.1",
     "grunt-contrib-stylus": "~0.5.0",
     "grunt-env": "~0.4.0",
-    "grunt-este": "git://github.com/twobits-cz/grunt-este.git#50106ade3658ed8e21c5c519f039eb0c2b86b7b9",
-    "grunt-este-watch": "~0.0.3",
-    "grunt-release": "~0.3.3",
+    "grunt-este": "~2.3.0",
+    "grunt-este-watch": "~0.0.5",
+    "grunt-release": "~0.3.5",
     "grunt-text-replace": "~0.3.2",
     "piping": "~0.1.6"
   },

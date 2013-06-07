@@ -215,6 +215,7 @@ module.exports = (grunt) ->
         ['esteTemplates:app']
 
       js: (filepath) ->
+        grunt.config ['esteDeps', 'all', 'src'], filepath
         grunt.config ['esteUnitTests', 'app', 'src'], filepath
         tasks = ['esteDeps:all', 'esteUnitTests:app']
         if grunt.option 'stage'
