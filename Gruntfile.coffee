@@ -153,6 +153,7 @@ module.exports = (grunt) ->
           else
             flags = flags.concat [
               '--define=goog.DEBUG=false'
+              '--externs=client/tripomatic2/externs.js'
             ]
           flags
 
