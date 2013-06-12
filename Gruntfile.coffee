@@ -11,6 +11,10 @@ module.exports = (grunt) ->
     'server/**/*.coffee'
   ]
 
+  ourCoffeeScripts = [
+    'client/tripomatic2/js/**/*.coffee'
+  ]
+
   soyTemplates = [
     'bower_components/este-library/este/**/*.soy'
     'client/tripomatic2/js/**/*.soy'
@@ -90,13 +94,16 @@ module.exports = (grunt) ->
         indentation:
           level: 'ignore'
 #        cyclomatic_complexity:
+#          value: 16
 #          level: 'error'
         line_endings:
+          level: 'error'
+        space_operators:
           level: 'error'
       all:
         files: [
           expand: true
-          src: coffeeScripts
+          src: ourCoffeeScripts
         ]
 
     esteTemplates:
