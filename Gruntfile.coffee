@@ -71,9 +71,9 @@ module.exports = (grunt) ->
           level: 'ignore'
         indentation:
           level: 'ignore'
-#        cyclomatic_complexity:
-#          value: 16
-#          level: 'error'
+       cyclomatic_complexity:
+         value: 16
+         level: 'error'
         line_endings:
           level: 'error'
         space_operators:
