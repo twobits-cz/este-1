@@ -28,10 +28,10 @@ module.exports = (grunt) ->
   clientDepsPrefix =
     '../../../../'
 
-  grunt.initConfig
+
 
     #build tasks
-
+  config =
     clean:
       app:
         options:
@@ -146,6 +146,10 @@ module.exports = (grunt) ->
         options:
           namespace: 'tb.tripomatic.planner.start'
           outputFilePath: 'client/tripomatic2/build/app.js'
+      map:
+        options:
+          namespace: 'tb.demos.app.map.start'
+          outputFilePath: 'client/tripomatic2/build/map.js'
 
       # Use this task to build specific language, /client/build/app_de.js etc.
       # appLocalized:
@@ -237,6 +241,11 @@ module.exports = (grunt) ->
         push: true
         pushTags: true
         npm: false
+
+  mapExtends = ['clean', 'coffee', 'coffee2closure', 'esteTemplates', 'esteUnitTests', 'cssmin']
+  for ext in mapExtends
+    config[ext].map = config[ext].app
+  grunt.initConfig config
 
   grunt.loadNpmTasks 'grunt-bg-shell'
   grunt.loadNpmTasks 'grunt-coffeelint'
