@@ -150,6 +150,10 @@ module.exports = (grunt) ->
         options:
           namespace: 'tb.demos.app.map.start'
           outputFilePath: 'client/tripomatic2/build/map.js'
+      activityDetail:
+        options:
+          namespace: 'tb.demos.app.activityDetail.start'
+          outputFilePath: 'client/tripomatic2/build/activityDetail.js'
 
       # Use this task to build specific language, /client/build/app_de.js etc.
       # appLocalized:
@@ -242,9 +246,11 @@ module.exports = (grunt) ->
         pushTags: true
         npm: false
 
-  mapExtends = ['clean', 'coffee', 'coffee2closure', 'esteTemplates', 'esteUnitTests', 'cssmin']
-  for ext in mapExtends
+  demosExtends = ['clean', 'coffee', 'coffee2closure', 'esteTemplates', 'esteUnitTests', 'cssmin']
+  for ext in demosExtends
     config[ext].map = config[ext].app
+    config[ext].activityDetail = config[ext].app
+
   grunt.initConfig config
 
   grunt.loadNpmTasks 'grunt-bg-shell'
