@@ -154,6 +154,10 @@ module.exports = (grunt) ->
         options:
           namespace: 'tb.demos.app.activityDetail.start'
           outputFilePath: 'client/tripomatic2/build/activityDetail.js'
+      activityInTripSwitch:
+        options:
+          namespace: 'tb.demos.app.activityInTripSwitch.start'
+          outputFilePath: 'client/tripomatic2/build/activityInTripSwitch.js'
 
       # Use this task to build specific language, /client/build/app_de.js etc.
       # appLocalized:
@@ -250,6 +254,7 @@ module.exports = (grunt) ->
   for ext in demosExtends
     config[ext].map = config[ext].app
     config[ext].activityDetail = config[ext].app
+    config[ext].activityInTripSwitch = config[ext].app
 
   grunt.initConfig config
 
