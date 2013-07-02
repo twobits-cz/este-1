@@ -1,5 +1,10 @@
 module.exports = (grunt) ->
 
+  stylusStyles = [
+   'bower_components/este-library/este/**/*.styl'
+   'client/tripomatic2/css/**/*.styl'
+  ]
+
   coffeeScripts = [
     'bower_components/este-library/este/**/*.coffee'
     'client/tripomatic2/js/**/*.coffee'
@@ -42,6 +47,23 @@ module.exports = (grunt) ->
           'client/**/{js}/**/*.{js}'
           'server/**/*.js'
         ]
+    stylus:
+      options:
+        'include css': true
+        'compress': false
+      all:
+        files: [
+          expand: true
+          src: stylusStyles
+          ext: '.css'
+        ]
+      app:
+        files: [
+          expand: true
+          src: 'client/tripomatic2/css/app.styl'
+          ext: '.css'
+        ]
+
 
     coffee:
       options:
@@ -224,6 +246,14 @@ module.exports = (grunt) ->
           tasks.push 'esteBuilder:app'
         tasks
 
+      styl: (filepath) ->
+        grunt.config ['stylus', 'all', 'files'], [
+           expand: true
+           src: filepath
+           ext: '.css'
+        ]
+        ['stylus:all', 'stylus:app']
+
       css: (filepath) ->
         if grunt.option('stage')
           return 'cssmin:app'
@@ -263,6 +293,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-cssmin'
+  grunt.loadNpmTasks 'grunt-contrib-stylus'
   grunt.loadNpmTasks 'grunt-env'
   grunt.loadNpmTasks 'grunt-este'
   grunt.loadNpmTasks 'grunt-este-watch'
@@ -272,6 +303,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'build', 'Build app.', (app = 'app') ->
     tasks = [
       "clean:#{app}"
+      "stylus:all"
       "coffee:#{app}"
       "coffee2closure:#{app}"
       "coffeelint"
