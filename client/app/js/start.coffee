@@ -1,40 +1,45 @@
 ###*
-  @fileoverview App start.
+  @fileoverview Este app boilerplate. This example demonstrates a simple
+  TodoMVC component. To see full TodoMVC app, check:
+  este/bower_components/este-library/este/demos/app/todomvc/index.html.
 ###
 
+# This is how we provide namespaces.
 goog.provide 'app.start'
 
-goog.require 'app.templates'
-goog.require 'este.dev.Monitor.create'
-goog.require 'goog.dom'
-goog.require 'goog.events'
+# Let's require what our app needs.
+goog.require 'app.todos.create'
 
 ###*
-  @param {Object} data JSON from server
+  App main entry point. This function should be called before body closing tag.
+  @param {Object} data Server side JSON data.
 ###
 app.start = (data) ->
 
-  # use [] syntax for uncompiled json
-  # e.g. data['someDataFromServer']
-
-  if goog.DEBUG
-    este.dev.Monitor.create()
-
-  html = app.templates.callToAction action: 'click'
-
-  box = goog.dom.createDom 'div',
-    style: 'width: 17em; height: 4em; background-color: #ff8c55; padding: 1em'
-    class: 'some-box'
-    innerHTML: html
-  document.body.appendChild box
-
-  ###*
-    @desc Text shown in alert after click.
   ###
-  app.MSG_THANKYOU = goog.getMsg 'Thank you!'
+    Our application probably needs some server side data. Serialize your
+    server side model into plain JSON and pass it into 'app.start' method.
 
-  goog.events.listen box, 'click', ->
-    alert app.MSG_THANKYOU
+    Example:
+    app.start({
+      "user": {
+        "id": '123',
+        "name": 'Joe Satriani'
+      }
+    });
 
-# ensures the symbol will be visible after compiler renaming
+    Este uses closure compiler advanced level by default. Read:
+    https://developers.google.com/closure/compiler/docs/api-tutorial3#better
+
+    All code is ultimately minified with unbeatable level of compression,
+    except server side JSON. To access server side JSON, use [] syntax.
+
+    Example:
+    alert data['user']['name']
+  ###
+
+  # Create simple TodoMVC component via its factory method.
+  app.todos.create '#todo-mvc'
+
+# Ensures the symbol will be visible after compiler renaming.
 goog.exportSymbol 'app.start', app.start

@@ -127,7 +127,7 @@ module.exports = (grunt) ->
           'client/**/*_test.js'
         ]
 
-    # build --stage tasks, build for production
+    # build --stage tasks
 
     cssmin:
       app:
@@ -138,23 +138,34 @@ module.exports = (grunt) ->
       options:
         root: clientDirs
         depsPath: clientDepsPath
+
+        # Enable faster compilation for Windows with Java 1.7+.
+        # javaFlags: ['-XX:+TieredCompilation']
         compilerFlags: do ->
-          # you will love advanced compilation with verbose warning level
+
+          # Default compiler settings. You will love advanced compilation with
+          # verbose warning level.
           flags = [
-            '--output_wrapper="(function(){%output%})();"'
-            '--compilation_level="ADVANCED_OPTIMIZATIONS"'
-            '--warning_level="VERBOSE"'
+            '--output_wrapper=(function(){%output%})();'
+            '--compilation_level=ADVANCED_OPTIMIZATIONS'
+            '--warning_level=VERBOSE'
+            # experimental stuff
+            # '--use_types_for_optimization'
           ]
-          # remove code for ancient browsers (IE<8, very old Gecko/Webkit)
+
+          # Remove some code workarounds for ancient browsers.
+          # IE<8 and very old Gecko and Webkit.
           flags = flags.concat [
             '--define=goog.net.XmlHttp.ASSUME_NATIVE_XHR=true'
             '--define=este.json.SUPPORTS_NATIVE_JSON=true'
             '--define=goog.style.GET_BOUNDING_CLIENT_RECT_ALWAYS_EXISTS=true'
           ]
+
+          # Enable debug compiled mode for --stage=debug.
           if grunt.option('stage') == 'debug'
             flags = flags.concat [
               '--debug=true'
-              '--formatting="PRETTY_PRINT"'
+              '--formatting=PRETTY_PRINT'
               '--define=goog.DEBUG=true'
             ]
           else
@@ -162,7 +173,12 @@ module.exports = (grunt) ->
               '--define=goog.DEBUG=false'
               '--externs=client/tripomatic2/externs.js'
             ]
-          flags
+
+          # Externs. They allow us to use thirdparty code without [] syntax.
+          # Uncomment if your app requires este.trirdParty.react namespace.
+          # flags.concat [
+          #   '--externs=bower_components/este-library/externs/react/react-3.3.js'
+          # ]
 
       app:
         options:
@@ -280,6 +296,12 @@ module.exports = (grunt) ->
         pushTags: true
         npm: false
 
+    'npm-contributors':
+      options:
+        file: 'package.json'
+        commit: false
+        commitMessage: 'Update contributors'
+
   demosExtends = ['clean', 'coffee', 'coffee2closure', 'esteTemplates', 'esteUnitTests', 'cssmin']
   for ext in demosExtends
     config[ext].map = config[ext].app
@@ -297,6 +319,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-env'
   grunt.loadNpmTasks 'grunt-este'
   grunt.loadNpmTasks 'grunt-este-watch'
+  grunt.loadNpmTasks 'grunt-npm'
   grunt.loadNpmTasks 'grunt-release'
   grunt.loadNpmTasks 'grunt-text-replace'
 
