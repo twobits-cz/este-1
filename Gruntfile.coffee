@@ -131,8 +131,14 @@ module.exports = (grunt) ->
 
     cssmin:
       app:
-        files:
-          'client/tripomatic2/build/app.css': 'client/tripomatic2/css/app.css'
+          files:
+            'client/tripomatic2/build/css/style.css': [
+              'bower_components/este-library/este/demos/css/lightbox.css',
+              'bower_components/closure-library/closure/goog/css/menu.css',
+              'bower_components/closure-library/closure/goog/css/menuitem.css',
+              'bower_components/closure-library/closure/goog/css/menuseparator.css',
+              'client/tripomatic2/css/style.css'
+            ]
 
     esteBuilder:
       options:
