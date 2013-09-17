@@ -196,6 +196,14 @@ module.exports = (grunt) ->
         options:
           namespace: 'tb.demos.app.map.start'
           outputFilePath: 'client/tripomatic2/build/map.js'
+      myTrips:
+        options:
+          namespace: 'tb.myTrips.start'
+          outputFilePath: 'client/tripomatic2/build/myTrips.js'
+      login:
+        options:
+          namespace: 'tb.demos.app.loginDemo.start'
+          outputFilePath: 'client/tripomatic2/build/signinup.js'
       activityDetail:
         options:
           namespace: 'tb.demos.app.activityDetail.start'
@@ -315,6 +323,9 @@ module.exports = (grunt) ->
     config[ext].map = config[ext].app
     config[ext].activityDetail = config[ext].app
     config[ext].activityInTripSwitch = config[ext].app
+    config[ext].myTrips = config[ext].app
+    config[ext].login = config[ext].app
+
 
   grunt.initConfig config
 
