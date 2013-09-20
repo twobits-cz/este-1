@@ -184,9 +184,9 @@ module.exports = (grunt) ->
 
           # Externs. They allow us to use thirdparty code without [] syntax.
           # Uncomment if your app requires este.trirdParty.react namespace.
-          # flags.concat [
-          #   '--externs=bower_components/este-library/externs/react/react-3.3.js'
-          # ]
+          flags.concat [
+            '--externs=bower_components/este-library/externs/react.js'
+          ]
 
       app:
         options:
