@@ -182,8 +182,8 @@ module.exports = (grunt) ->
               '--externs=client/tripomatic2/externs.js'
             ]
 
-          # Externs. They allow us to use thirdparty code without [] syntax.
-          # Uncomment if your app requires este.trirdParty.react namespace.
+          # Compiler Externs. They allow us to use thirdparty code without []
+          # syntax.
           flags.concat [
             '--externs=bower_components/este-library/externs/react.js'
           ]
@@ -330,7 +330,6 @@ module.exports = (grunt) ->
   grunt.initConfig config
 
   grunt.loadNpmTasks 'grunt-bg-shell'
-  grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-cssmin'
@@ -348,7 +347,6 @@ module.exports = (grunt) ->
       "stylus:all"
       "coffee:#{app}"
       "coffee2closure:#{app}"
-      "coffeelint"
       "esteTemplates:#{app}"
       "esteDeps"
       "esteUnitTests:#{app}"
