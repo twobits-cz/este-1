@@ -1,40 +1,5 @@
 module.exports = (grunt) ->
 
-  stylusStyles = [
-   'bower_components/este-library/este/**/*.styl'
-   'client/tripomatic2/css/**/*.styl'
-  ]
-
-  coffeeScripts = [
-    'bower_components/este-library/este/**/*.coffee'
-    'client/tripomatic2/js/**/*.coffee'
-    'server/**/*.coffee'
-  ]
-
-  ourCoffeeScripts = [
-    'client/tripomatic2/js/**/*.coffee'
-  ]
-
-  soyTemplates = [
-    'bower_components/este-library/este/**/*.soy'
-    'client/tripomatic2/js/**/*.soy'
-  ]
-
-  clientDirs = [
-    'bower_components/closure-library'
-    'bower_components/closure-templates'
-    'bower_components/este-library/este'
-    'client/tripomatic2/js'
-  ]
-
-  clientDepsPath =
-    'client/deps.js'
-
-  clientDepsPrefix =
-    '../../../../'
-
-
-
     #build tasks
   config =
     clean:
@@ -54,7 +19,10 @@ module.exports = (grunt) ->
       all:
         files: [
           expand: true
-          src: stylusStyles
+          src: [
+            'bower_components/este-library/este/**/*.styl'
+            'client/app/css/**/*.styl'
+          ]
           ext: '.css'
         ]
       app:
@@ -71,24 +39,18 @@ module.exports = (grunt) ->
       app:
         files: [
           expand: true
-          src: coffeeScripts
+          src: [
+            'bower_components/este-library/este/**/*.coffee'
+            'client/app/js/**/*.coffee'
+            'client/tripomatic2/js/**/*.coffee'
+            'server/**/*.coffee'
+          ]
           ext: '.js'
         ]
 
     coffee2closure:
       app:
-        files: [
-          expand: true
-          src: coffeeScripts
-          ext: '.js'
-        ]
-
-    coffeelint:
-      options:
-        no_backticks:
-          level: 'ignore'
-        max_line_length:
-          level: 'ignore'
+        files: '<%= coffee.app.files %>'
         no_tabs:
           level: 'ignore'
         indentation:
@@ -98,29 +60,32 @@ module.exports = (grunt) ->
          level: 'error'
         line_endings:
           level: 'error'
-        space_operators:
-          level: 'error'
-      all:
-        files: [
-          expand: true
-          src: ourCoffeeScripts
-        ]
 
     esteTemplates:
       app:
-        src: soyTemplates
+        src: [
+          'bower_components/este-library/este/**/*.soy'
+          'client/app/js/**/*.soy'
+          'client/tripomatic2/js/**/*.soy'
+        ]
 
     esteDeps:
       all:
         options:
-          outputFile: clientDepsPath
-          prefix: clientDepsPrefix
-          root: clientDirs
+          outputFile: 'client/deps.js'
+          prefix: '../../../../'
+          root: [
+            'bower_components/closure-library'
+            'bower_components/closure-templates'
+            'bower_components/este-library/este'
+            'client/app/js'
+            'client/tripomatic2/js'
+          ]
 
     esteUnitTests:
       options:
-        depsPath: clientDepsPath
-        prefix: clientDepsPrefix
+        depsPath: '<%= esteDeps.all.options.outputFile %>'
+        prefix: '<%= esteDeps.all.options.prefix %>'
       app:
         src: [
           'bower_components/este-library/este/**/*_test.js'
@@ -144,11 +109,9 @@ module.exports = (grunt) ->
 
     esteBuilder:
       options:
-        root: clientDirs
-        depsPath: clientDepsPath
+        root: '<%= esteDeps.all.options.root%>'
+        depsPath: '<%= esteDeps.all.options.outputFile %>'
 
-        # Enable faster compilation for Windows with Java 1.7+.
-        # javaFlags: ['-XX:+TieredCompilation']
         compilerFlags: do ->
 
           # Default compiler settings. You will love advanced compilation with
@@ -182,8 +145,8 @@ module.exports = (grunt) ->
               '--externs=client/tripomatic2/externs.js'
             ]
 
-          # Externs. They allow us to use thirdparty code without [] syntax.
-          # Uncomment if your app requires este.trirdParty.react namespace.
+          # Compiler Externs. They allow us to use thirdparty code without []
+          # syntax.
           flags.concat [
             '--externs=bower_components/este-library/externs/react.js'
           ]
@@ -225,7 +188,7 @@ module.exports = (grunt) ->
 
     replace:
       esteLibraryVersion:
-        src: 'server/app/views/index.jade'
+        src: 'server/app/views/home.jade'
         overwrite: true
         replacements: [
           from: /\(v.+\)/g
@@ -302,15 +265,12 @@ module.exports = (grunt) ->
           messagesPath: 'messages/app'
           languages: ['en', 'cs']
 
-    release:
+    bump:
       options:
-        bump: true
-        add: true
-        commit: true
-        tag: true
-        push: true
-        pushTags: true
-        npm: false
+        commitFiles: ['-a']
+        files: ['bower.json', 'package.json']
+        pushTo: 'origin'
+        tagName: '%VERSION%'
 
     'npm-contributors':
       options:
@@ -330,7 +290,7 @@ module.exports = (grunt) ->
   grunt.initConfig config
 
   grunt.loadNpmTasks 'grunt-bg-shell'
-  grunt.loadNpmTasks 'grunt-coffeelint'
+  grunt.loadNpmTasks 'grunt-bump'
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-cssmin'
@@ -339,7 +299,6 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-este'
   grunt.loadNpmTasks 'grunt-este-watch'
   grunt.loadNpmTasks 'grunt-npm'
-  grunt.loadNpmTasks 'grunt-release'
   grunt.loadNpmTasks 'grunt-text-replace'
 
   grunt.registerTask 'build', 'Build app.', (app = 'app') ->
@@ -348,7 +307,6 @@ module.exports = (grunt) ->
       "stylus:all"
       "coffee:#{app}"
       "coffee2closure:#{app}"
-      "coffeelint"
       "esteTemplates:#{app}"
       "esteDeps"
       "esteUnitTests:#{app}"
