@@ -11,6 +11,7 @@ module.exports = (grunt) ->
           'client/**/build/**.*'
           'client/**/{js}/**/*.{js}'
           'server/**/*.js'
+          '../tripomatic-sdk/client/**/*.js'
         ]
     stylus:
       options:
@@ -44,6 +45,7 @@ module.exports = (grunt) ->
             'client/app/js/**/*.coffee'
             'client/tripomatic2/js/**/*.coffee'
             'server/**/*.coffee'
+            '../tripomatic-sdk/client/**/*.coffee'
           ]
           ext: '.js'
         ]
@@ -80,6 +82,7 @@ module.exports = (grunt) ->
             'bower_components/este-library/este'
             'client/app/js'
             'client/tripomatic2/js'
+            '../tripomatic-sdk/client/app/js'
           ]
 
     esteUnitTests:
@@ -143,6 +146,7 @@ module.exports = (grunt) ->
             flags = flags.concat [
               '--define=goog.DEBUG=false'
               '--externs=client/tripomatic2/externs.js'
+              '--externs=client/tripomatic2/sdk-externs.js'
             ]
 
           # Compiler Externs. They allow us to use thirdparty code without []

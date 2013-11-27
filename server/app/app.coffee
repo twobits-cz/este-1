@@ -18,6 +18,7 @@ module.exports = (config, express, logger) ->
 setStatics = (app, express, development) ->
   if development
     app.use '/client', express.static 'client'
+    app.use '/tripomatic-sdk', express.static '../tripomatic-sdk'
     app.use '/bower_components', express.static 'bower_components'
   else
     app.use '/client', express.static 'client'
