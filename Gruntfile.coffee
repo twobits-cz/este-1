@@ -106,7 +106,7 @@ module.exports = (grunt) ->
               'bower_components/closure-library/closure/goog/css/menuitem.css',
               'bower_components/closure-library/closure/goog/css/menuseparator.css',
               'bower_components/este-library/este/css/scrollbar.css',
-              'client/tripomatic2/css/style.css',
+              'client/tripomatic2/css/style.css'
             ]
 
     esteBuilder:
